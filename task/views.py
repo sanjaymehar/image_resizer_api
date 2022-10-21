@@ -80,7 +80,8 @@ class YourModelView(APIView):
             ser=Eimage.objects.filter(id=z.id)
             
             serializer =ISerializer(ser, context={"request": request}, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreateUserView(generics.CreateAPIView):
